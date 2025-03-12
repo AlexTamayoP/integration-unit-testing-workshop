@@ -32,3 +32,8 @@ lerna-debug.log*
 
 # Env files
 .env
+
+# Tests
+/coverage
+/.nyc_output
+/test_reports
