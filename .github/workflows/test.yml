@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - '*'
+  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   test:
