@@ -44,8 +44,8 @@ const axios = getAxiosInstance();
 describe('(Integration) Books', () => {
   beforeAll(async () => {
     nock(`${get('thirdParty.url')}`)
-      .get('word')
-      .reply(200, 'Mocked Upcoming');
+      .get('/word')
+      .reply(200, ['Mocked Upcoming']);
 
     await startServer();
 
@@ -80,7 +80,7 @@ describe('(Integration) Books', () => {
       });
     });
 
-    describe('upcoming', () => {
+    describe('/upcoming', () => {
       describe('GET', () => {
         describe('when the user gets upcoming book', () => {
           test('then the service should return upcoming book', async () => {
