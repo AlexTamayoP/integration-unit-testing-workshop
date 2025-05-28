@@ -56,6 +56,15 @@ export class BooksService {
   }
 
   async createBook(book: CreateBookRequest): Promise<BookModel> {
+    const existingBook: boolean = await this.booksRepository.existsByNameAndAuthor(book.name, book.author);
+
+    if (existingBook) {
+      throw new HttpException(
+        `Book with name ${book.name} already exists`,
+        HttpStatus.CONFLICT,
+      );
+    }
+
     if (book.quantity < book.totalAvailable) {
       throw new HttpException(
         'totalAvailable cannot be greater than quantity',
@@ -83,7 +92,7 @@ export class BooksService {
       );
     }
   }
-  
+
   async processInBg(book: CreateBookRequest): Promise<void> {
     setTimeout(() => {
       // "Complex logic"
@@ -129,4 +138,5 @@ export class BooksService {
 
     return bookReserved;
   }
+
 }

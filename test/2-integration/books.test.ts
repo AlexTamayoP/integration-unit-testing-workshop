@@ -96,5 +96,57 @@ describe('(Integration) Books', () => {
         });
       });
     });
+    describe('POST', () => {
+      describe('when the user creates a new book', () => {
+        test('then the service should create a new book', async () => {
+          //Arrange
+          const newBook = {
+            name: 'Clean code',
+            author: 'Robert C. Martin',
+            genre: 'Programming',
+            quantity: 20,
+            totalAvailable: 20,
+          };
+
+          //Act
+          const booksResponse = await axios.post('api/v1/books', newBook);
+
+          //Assert
+          expect(booksResponse).toMatchObject({
+            status: HttpStatus.CREATED,
+            data: expect.objectContaining({
+              id: expect.any(Number),
+              ...newBook,
+            }),
+          });
+        });
+      });
+
+      describe('when the user tries to create an existing book', () => {
+        test('then the service should return a conflict error', async () => {
+          // Arrange
+          const existingBook = {
+            name: "Harry Potter Philosopher's Stone",
+            author: 'J. K. Rowling',
+            genre: 'Fantasy',
+            quantity: 3,
+            totalAvailable: 1,
+          };
+
+          // Act
+          const booksResponse = await axios
+            .post('api/v1/books', existingBook)
+            .catch((error) => error.response);
+
+          // Assert
+          expect(booksResponse).toMatchObject({
+            status: HttpStatus.CONFLICT,
+            data: expect.objectContaining({
+              message: `Book with name ${existingBook.name} already exists`,
+            }),
+          });
+        });
+      });
+    });
   });
 });
