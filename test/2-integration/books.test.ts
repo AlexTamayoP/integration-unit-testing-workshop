@@ -96,6 +96,7 @@ describe('(Integration) Books', () => {
         });
       });
     });
+
     describe('POST', () => {
       describe('when the user creates a new book', () => {
         test('then the service should create a new book', async () => {
