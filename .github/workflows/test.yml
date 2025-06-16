@@ -11,6 +11,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Test Results
+          path: |
+            coverage/
+            test_reports/
       - name: Use Node.js 22.x
         uses: actions/setup-node@v3
         with:
