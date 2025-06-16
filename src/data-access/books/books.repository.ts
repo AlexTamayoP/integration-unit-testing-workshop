@@ -23,6 +23,16 @@ export class BooksRepository {
     return books;
   }
 
+  async existsByNameAndAuthor(name: string, author: string): Promise<boolean> {
+    const count = await this.booksRepository.count({
+      where: {
+        name: Raw((alias) => `LOWER(${alias}) = LOWER(:name)`, { name }),
+        author: Raw((alias) => `LOWER(${alias}) = LOWER(:author)`, { author }),
+      },
+    });
+    return count > 0;
+  }
+
   async findOne(id: number): Promise<BookModel | null> {
     return this.booksRepository.findOneBy({ id });
   }

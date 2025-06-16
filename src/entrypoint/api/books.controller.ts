@@ -49,6 +49,10 @@ export class BooksController {
     type: BookModel,
   })
   @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'Book with the same name and author already exists',
+  })
+  @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Bad Request',
   })
