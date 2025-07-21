@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "commit": "git cz",
+    "commit": "cz",
     "db:migrate": "npm run typeorm migration:run -- -d src/data-access/connection-options.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "seed": "ts-node test/test-helpers/db/seeding.ts",
@@ -68,6 +68,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "commitizen": "^4.3.1",
     "commitlint": "^17.6.3",
     "cz-conventional-changelog": "^3.3.0",
     "docker-compose": "^1.1.1",
