@@ -7,7 +7,6 @@ on:
 
 jobs:
   build-and-test:
-    # Replace ubuntu latest for an specific version so you can reproduce error if required
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
@@ -38,7 +37,9 @@ jobs:
         # This will check your last commit and return an error if invalid or a positive output if valid.
         run: npx commitlint --from HEAD~0 --to HEAD --verbose
 
-      # Run build of the app (as this step you can add audit, linter or any other step you want to check)
+      - name: Run ESLint
+        run: npm run lint
+
       - name: Run build
         run: npm run build
 
@@ -65,7 +66,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: build-and-test
     # Replace ubuntu latest for an specific version so you can reproduce error if required
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Required to generate releases
     permissions:
       contents: write
