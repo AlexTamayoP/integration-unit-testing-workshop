@@ -19,7 +19,6 @@ export default async function tearDown() {
     const customExec = promisify(exec);
     const migrations = await getMigrations();
 
-    const migrationsToRun = [];
     for (let migration = 0; migration < migrations.rowCount; migration += 1) {
       await customExec('npm run typeorm:revert');
     }

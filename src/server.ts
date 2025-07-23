@@ -6,7 +6,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { get } from '../config/convict';
 import { CustomLogger } from './utils/logger';
-const basicAuth = require('express-basic-auth');
+import basicAuth from 'express-basic-auth';
 
 let app: INestApplication;
 

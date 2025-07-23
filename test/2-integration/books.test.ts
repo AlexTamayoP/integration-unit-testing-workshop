@@ -2,8 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 import nock from 'nock';
 
 import { closeServer, startServer } from '../../src/server';
-import { getAxiosInstance } from '../test-helpers';
-import { saveBook } from '../test-helpers';
+import { getAxiosInstance, saveBook } from '../test-helpers';
 import { get } from '../../config/convict';
 
 const books = [
